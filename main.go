@@ -125,6 +125,12 @@ func main() {
 					stat.FailedUpdate++
 					continue
 				}
+				_, err = repack(local, config.MaxPackSize)
+				if err != nil {
+					log.Printf("Failed update [%s] -> [%s]: repack error:'%s'", remote, local, err)
+					stat.FailedUpdate++
+					continue
+				}
 				log.Printf("Successfully update [%s] -> [%s]", remote, local)
 				stat.Updated++
 			}
